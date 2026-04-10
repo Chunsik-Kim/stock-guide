@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>골든크로스 13기 - 투자 공부 참조 가이드</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1e40af;
+            --accent: #f59e0b;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --bg: #f8fafc;
+            --bg-white: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --text-lighter: #94a3b8;
+            --border: #e2e8f0;
+            --code-bg: #1e293b;
+            --sidebar-bg: #0f172a;
+            --sidebar-text: #cbd5e1;
+            --sidebar-active: #3b82f6;
+            --gold: #f59e0b;
+            --gold-dark: #d97706;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.7;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 0;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 28px 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sidebar-header h2 {
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header .subtitle {
+            font-size: 12px;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar nav {
+            padding: 12px 0;
+        }
+
+        .sidebar nav a {
+            display: block;
+            padding: 10px 24px;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            background: rgba(59, 130, 246, 0.1);
+            color: #fff;
+            border-left-color: var(--sidebar-active);
+        }
+
+        .sidebar nav .nav-section {
+            padding: 16px 24px 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-lighter);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Menu Toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 200;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--sidebar-bg);
+            color: #fff;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: 280px;
+            flex: 1;
+            max-width: 900px;
+            padding: 0 40px 80px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #f59e0b 100%);
+            margin: 0 -40px;
+            padding: 60px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -40px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(245, 158, 11, 0.15);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: 30%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .hero-desc {
+            font-size: 16px;
+            color: rgba(255,255,255,0.8);
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .hero .hero-meta {
+            margin-top: 16px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .hero-meta span {
+            background: rgba(255,255,255,0.15);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+            backdrop-filter: blur(4px);
+        }
+
+        /* Section */
+        section {
+            margin-top: 48px;
+        }
+
+        section h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+        }
+
+        section h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 32px 0 12px;
+        }
+
+        section h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text);
+            margin: 24px 0 10px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 16px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: var(--sidebar-bg);
+            color: #fff;
+        }
+
+        thead th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+        }
+
+        tbody td {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: rgba(59, 130, 246, 0.04);
+        }
+
+        tbody td strong {
+            color: var(--primary-dark);
+        }
+
+        /* Info Boxes */
+        .box {
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+
+        .box-title {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .box.strategy {
+            background: #eff6ff;
+            border-color: var(--primary);
+        }
+        .box.strategy .box-title { color: var(--primary-dark); }
+
+        .box.warning {
+            background: #fef3c7;
+            border-color: var(--gold-dark);
+        }
+        .box.warning .box-title { color: var(--gold-dark); }
+
+        .box.danger {
+            background: #fef2f2;
+            border-color: var(--accent-red);
+        }
+        .box.danger .box-title { color: var(--accent-red); }
+
+        .box.tip {
+            background: #ecfdf5;
+            border-color: var(--accent-green);
+        }
+        .box.tip .box-title { color: #059669; }
+
+        .box.gold {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border-color: var(--gold);
+        }
+        .box.gold .box-title { color: var(--gold-dark); }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--code-bg);
+            color: #e2e8f0;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 16px 0;
+            font-family: 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block .label {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 11px;
+            color: var(--text-lighter);
+            background: rgba(255,255,255,0.08);
+            padding: 2px 10px;
+            border-radius: 6px;
+        }
+
+        .code-block .highlight { color: var(--gold); font-weight: 600; }
+        .code-block .green { color: #34d399; }
+        .code-block .blue { color: #60a5fa; }
+        .code-block .comment { color: #64748b; }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .card .card-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 6px;
+            color: var(--text);
+        }
+
+        .card p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Tier badges */
+        .tier {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .tier-1 { background: #fef3c7; color: #92400e; }
+        .tier-2 { background: #e0e7ff; color: #3730a3; }
+        .tier-3 { background: #f1f5f9; color: #475569; }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0;
+        }
+
+        .checklist li {
+            padding: 8px 0 8px 32px;
+            position: relative;
+            font-size: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .checklist li:last-child { border-bottom: none; }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--primary-light);
+            border-radius: 4px;
+        }
+
+        /* Flow diagram */
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .flow-step {
+            background: var(--primary);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .flow-arrow {
+            color: var(--text-lighter);
+            font-size: 18px;
+        }
+
+        /* Quote */
+        .quote {
+            background: var(--bg-white);
+            border-left: 4px solid var(--gold);
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: var(--text);
+        }
+
+        .quote .author {
+            font-style: normal;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        /* Theme tag */
+        .theme-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 2px 4px 2px 0;
+        }
+
+        .theme-hot { background: #fef2f2; color: #dc2626; }
+        .theme-warm { background: #fff7ed; color: #ea580c; }
+        .theme-safe { background: #ecfdf5; color: #059669; }
+        .theme-watch { background: #eff6ff; color: #2563eb; }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+            margin: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 8px 0 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 12px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid #fff;
+        }
+
+        .timeline-item.up::before { background: var(--accent-green); }
+        .timeline-item.down::before { background: var(--accent-red); }
+
+        .timeline-date {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .timeline-event {
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .timeline-value {
+            font-size: 13px;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        .timeline-value.up { color: var(--accent-green); }
+        .timeline-value.down { color: var(--accent-red); }
+
+        /* Persona cards */
+        .persona {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .persona-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .persona-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .persona-name {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .persona-role {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .persona-content {
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .persona-content strong { color: var(--primary-dark); }
+
+        /* Process Steps */
+        .process-steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+        }
+
+        .process-steps li {
+            counter-increment: step;
+            padding: 12px 16px 12px 52px;
+            position: relative;
+            margin-bottom: 8px;
+            background: var(--bg-white);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            font-size: 15px;
+        }
+
+        .process-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding: 32px 0;
+            border-top: 2px solid var(--border);
+            text-align: center;
+            color: var(--text-lighter);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            .main {
+                margin-left: 0;
+                padding: 0 20px 60px;
+            }
+            .hero {
+                margin: 0 -20px;
+                padding: 80px 24px 40px;
+            }
+            .hero h1 {
+                font-size: 26px;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll behavior */
+        html { scroll-behavior: smooth; }
+
+        /* Scrollbar */
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<!-- Mobile Menu Toggle -->
+<button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <h2>Investment Guide</h2>
+        <div class="subtitle">GOLDEN CROSS 13th</div>
+    </div>
+    <nav>
+        <div class="nav-section">Framework</div>
+        <a href="#framework" class="active">Part 1. 분석 프레임워크</a>
+        <a href="#principles">Part 2. 투자 절대 원칙</a>
+
+        <div class="nav-section">Sector Deep Dive</div>
+        <a href="#semiconductor">Part 3. 반도체 공급망</a>
+        <a href="#themes">Part 4. 2026 주목 테마</a>
+
+        <div class="nav-section">Practice</div>
+        <a href="#checklist">Part 5. 실전 체크리스트</a>
+        <a href="#market">Part 6. 시장 흐름 복기</a>
+        <a href="#wisdom">Part 7. 핵심 교훈</a>
+        <a href="#tools">Part 8. 참고 도구</a>
+    </nav>
+</aside>
+
+<!-- Main Content -->
+<main class="main">
+
+    <!-- Hero -->
+    <div class="hero" id="top">
+        <h1>골든크로스 13기에서 배우는<br>주식 투자 가이드</h1>
+        <p class="hero-desc">
+            1개월간의 실전 대화에서 추출한 분석법, 종목, 원칙, 체크리스트.<br>
+            전쟁 발발부터 휴전까지 극한 장세를 겪은 실전 투자자들의 인사이트.
+        </p>
+        <div class="hero-meta">
+            <span>2026.03.08 ~ 04.08</span>
+            <span>대화 566개 이미지 분석</span>
+            <span>4인의 투자 철학</span>
+        </div>
+    </div>
+
+    <!-- Part 1: Framework -->
+    <section id="framework">
+        <h2>Part 1. 투자 분석 프레임워크</h2>
+        <p>단톡방 핵심 멤버 4명은 각자 다른 스타일로 시장을 봅니다. 4가지 관점을 조합하면 훨씬 입체적인 분석이 가능합니다.</p>
+
+        <!-- 장건 회장 -->
+        <div class="persona">
+            <div class="persona-header">
+                <div class="persona-avatar" style="background: linear-gradient(135deg, #1e40af, #3b82f6);">JG</div>
+                <div>
+                    <div class="persona-name">장건 회장</div>
+                    <div class="persona-role">섹터 순환 + 실적 기반 스윙 매매</div>
+                </div>
+            </div>
+            <div class="persona-content">
+                <p>매일 장마감 후 <strong>상승률 순위</strong>를 본다. 같은 종목이 <strong>반복 등장</strong>하면 시장의 관심이 몰린 것.
+                좋은 타점(눌림목, 조정구간)에서 매수 후 <strong>실적 발표일 갭상승에 매도</strong>.</p>
+            </div>
+        </div>
+
+        <div class="code-block">
+            <span class="label">장건식 루틴</span>
+<span class="comment">// 매일 반복하는 6단계</span>
+<span class="blue">1.</span> 장마감 후 &rarr; <span class="highlight">상승률 TOP 20</span> 종목 확인
+<span class="blue">2.</span> 섹터별로 묶기 (반도체? 바이오? 에너지?)
+<span class="blue">3.</span> <span class="green">3일 연속</span> 같은 섹터 상승 &rarr; 테마 형성 중
+<span class="blue">4.</span> 해당 섹터 내 <span class="highlight">1위/2위 기업</span> 선별
+<span class="blue">5.</span> 조정(눌림목) 올 때 <span class="green">분할매수</span>
+<span class="blue">6.</span> 실적 발표 전후 갭상승 시 <span class="highlight">매도</span>
+        </div>
+
+        <!-- 김도아 -->
+        <div class="persona">
+            <div class="persona-header">
+                <div class="persona-avatar" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">DA</div>
+                <div>
+                    <div class="persona-name">김도아 교육이사</div>
+                    <div class="persona-role">매크로 전략 + 차트 분석 + 적정주가 산출</div>
+                </div>
+            </div>
+            <div class="persona-content">
+                <p><strong>주봉 기준</strong> 파동 분석으로 타이밍. <strong>3~4년 평균 영업이익</strong> 대비 올해 추정치 증가율로 적정주가 산출. 전쟁/위기 때 타격 없는 종목이 <strong>진짜 강한 종목</strong>.</p>
+            </div>
+        </div>
+
+        <div class="box strategy">
+            <div class="box-title">적정주가 산출법 (간이)</div>
+            <ol class="process-steps">
+                <li>최근 <strong>3~4년 평균 영업이익</strong> 계산</li>
+                <li>올해 <strong>컨센서스(추정) 영업이익</strong> 확인</li>
+                <li>증가율 = (올해 추정 - 평균) / 평균 x 100</li>
+                <li>증가율 <strong>30%+</strong> 이면서 주가 미반영 &rarr; 매수 후보</li>
+                <li>주봉 차트에서 <strong>2파동 눌림목</strong> 확인 후 진입</li>
+            </ol>
+        </div>
+
+        <!-- 김영창 -->
+        <div class="persona">
+            <div class="persona-header">
+                <div class="persona-avatar" style="background: linear-gradient(135deg, #059669, #34d399);">YC</div>
+                <div>
+                    <div class="persona-name">김영창</div>
+                    <div class="persona-role">수급 분석 + 지수 비교</div>
+                </div>
+            </div>
+            <div class="persona-content">
+                <p><strong>코스닥150 vs 코스닥 전체</strong> 비교 &mdash; 코스닥150이 더 강하면 산업형 상승(건강한 상승). 외인 수급 방향이 곧 시장 방향. 반도체 소부장에 <strong>전체 비중 10%</strong> 분할매수.</p>
+            </div>
+        </div>
+
+        <!-- H.S -->
+        <div class="persona">
+            <div class="persona-header">
+                <div class="persona-avatar" style="background: linear-gradient(135deg, #d97706, #f59e0b);">HS</div>
+                <div>
+                    <div class="persona-name">H.S</div>
+                    <div class="persona-role">배당 ETF 중심 안전 투자</div>
+                </div>
+            </div>
+            <div class="persona-content">
+                <p>개별종목은 <strong>전체 비중 10% 이하</strong>, 나머지는 ETF. "주가 20% 하락하면 연 10% 배당도 무의미" &mdash; <strong>구성 안정성 우선</strong>. 월배당 ETF로 현금흐름 확보 후 기회 시 개별종목 진입.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 2: Principles -->
+    <section id="principles">
+        <h2>Part 2. 투자 절대 원칙</h2>
+        <p>단톡방 멤버들이 공유한 <strong>생존 규칙</strong>. 이것만 지켜도 큰 손실은 피할 수 있습니다.</p>
+
+        <div class="box danger">
+            <div class="box-title">절대 하지 말 것</div>
+            <div class="table-wrap" style="border:none; margin: 8px 0 0;">
+                <table>
+                    <thead><tr><th>#</th><th>원칙</th><th>이유</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>1</strong></td><td>신용/미수 절대 금지</td><td>하락장 반대매매 &rarr; 강제 청산</td></tr>
+                        <tr><td><strong>2</strong></td><td>한 종목 몰빵 금지</td><td>개별종목 최대 10%</td></tr>
+                        <tr><td><strong>3</strong></td><td>상따(상한가 추격) 금지</td><td>다음날 하한가 리스크</td></tr>
+                        <tr><td><strong>4</strong></td><td>추격매수 금지</td><td>이미 오른 건 늦음</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="box tip">
+            <div class="box-title">반드시 지킬 것</div>
+            <div class="table-wrap" style="border:none; margin: 8px 0 0;">
+                <table>
+                    <thead><tr><th>#</th><th>원칙</th><th>효과</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>5</strong></td><td>현금비중 관리가 핵심</td><td>폭락 = 기회. 현금이 있어야 산다</td></tr>
+                        <tr><td><strong>6</strong></td><td>예상 투자 금지, 대응 투자</td><td>시장이 보여주는 대로</td></tr>
+                        <tr><td><strong>7</strong></td><td>AI 활용하되 맹신 금지</td><td>참고용, 최종 판단은 본인</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 3: Semiconductor -->
+    <section id="semiconductor">
+        <h2>Part 3. 반도체 공급망 완전 정리</h2>
+        <p>골든크로스 대화에서 가장 많이 다뤄진 테마. 공정별 핵심 기업을 알면 뉴스가 보입니다.</p>
+
+        <h3>3-1. 반도체 8대 공정 흐름</h3>
+
+        <div class="flow">
+            <span class="flow-step">웨이퍼</span><span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">산화</span><span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">포토</span><span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">식각</span><span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">박막</span><span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">금속배선</span><span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">테스트</span><span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">패키징</span>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>공정</th><th>핵심 기업</th><th>왜 중요한가</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>웨이퍼</strong></td><td>SK실트론, LG실트론</td><td>모든 반도체의 출발점</td></tr>
+                    <tr><td><strong>산화</strong></td><td>HPSP (독점, OPM 50%+), 원익IPS</td><td>HBM 핵심 공정</td></tr>
+                    <tr><td><strong>포토</strong></td><td>동진쎄미켐, 파크시스템스</td><td>EUV 노광 관련</td></tr>
+                    <tr><td><strong>식각</strong></td><td>PSK, 주성엔지니어링</td><td>3D NAND 적층 핵심</td></tr>
+                    <tr><td><strong>박막/CVD</strong></td><td>원익IPS, 유진테크, 한솔케미칼</td><td>증착 공정</td></tr>
+                    <tr><td><strong>금속배선</strong></td><td>솔브레인, 케이씨텍, 이엔에프테크</td><td>미세 배선</td></tr>
+                    <tr><td><strong>테스트</strong></td><td>ISC (HBM 전용), 리노공업, 테크윙</td><td>HBM 고가 &rarr; 테스트 중요</td></tr>
+                    <tr><td><strong>패키징</strong></td><td>한미반도체 (TC본더 70%+), 하나마이크론</td><td>후공정 핵심</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>3-2. HBM 수혜주 티어</h3>
+
+        <div class="card-grid">
+            <div class="card" style="border-top: 3px solid #f59e0b;">
+                <div class="card-icon"><span class="tier tier-1">1 TIER</span></div>
+                <h4>직접 수혜</h4>
+                <p><strong>SK하이닉스</strong> &mdash; HBM 세계 1위<br>
+                <strong>한미반도체</strong> &mdash; TC본더 점유율 70%+<br>
+                <strong>삼성전자</strong> &mdash; HBM3 추격, 1Q26 57.2조 서프라이즈</p>
+            </div>
+            <div class="card" style="border-top: 3px solid #6366f1;">
+                <div class="card-icon"><span class="tier tier-2">2 TIER</span></div>
+                <h4>기판/패키징</h4>
+                <p><strong>삼성전기</strong> &mdash; FC-BGA 국내 1위, MLCC<br>
+                <strong>심텍</strong> &mdash; MCP-PoP 글로벌 1위<br>
+                <strong>대덕전자</strong> &mdash; HDI/FC-BGA</p>
+            </div>
+            <div class="card" style="border-top: 3px solid #94a3b8;">
+                <div class="card-icon"><span class="tier tier-3">3 TIER</span></div>
+                <h4>장비/검사</h4>
+                <p><strong>이오테크닉스</strong> &mdash; 레이저 장비 1위<br>
+                <strong>하나마이크론</strong> &mdash; 국내 최대 OSAT<br>
+                <strong>ISC</strong> &mdash; HBM 테스트 소켓</p>
+            </div>
+        </div>
+
+        <h3>3-3. 광통신/CPO (차세대)</h3>
+        <div class="box strategy">
+            <div class="box-title">구리 &rarr; 광 전환 메가트렌드</div>
+            <p>데이터센터 전력/속도 한계로 구리 케이블에서 광통신으로 전환이 필수. GTC 이후 지속 강세.</p>
+            <div class="table-wrap" style="border:none; margin: 8px 0 0;">
+                <table>
+                    <thead><tr><th>종목</th><th>역할</th><th>특이사항</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>레이저셀</strong></td><td>CPO 핵심장비 (광통신 접합)</td><td>GTC 수혜</td></tr>
+                        <tr><td><strong>성호전자</strong></td><td>엔비디아 통신자회사 납품</td><td>10년래 최고 +28%</td></tr>
+                        <tr><td><strong>웨이비스</strong></td><td>통신장비</td><td>신고가 근접</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 4: Themes -->
+    <section id="themes">
+        <h2>Part 4. 2026년 주목할 테마</h2>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon"><span class="theme-tag theme-hot">최우선</span></div>
+                <h4>반도체 HBM/후공정</h4>
+                <p>전쟁 중에도 목표주가 상향된 유일한 섹터. SK하이닉스, 한미반도체, HPSP, ISC, 이수페타시스</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><span class="theme-tag theme-hot">핵심</span></div>
+                <h4>광통신/CPO</h4>
+                <p>구리&rarr;광 전환 메가트렌드. 레이저셀, 성호전자. GTC 이후 지속 강세.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><span class="theme-tag theme-warm">주목</span></div>
+                <h4>AI반도체 (팹리스)</h4>
+                <p>섹터맵 후반부에 리벨리온, 퓨리오사AI 등장. 국산 AI칩 테마.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><span class="theme-tag theme-warm">주목</span></div>
+                <h4>에너지 안보 (원전/풍력)</h4>
+                <p>유가 불안정 &rarr; 에너지 자립 테마 지속. 전쟁 리스크 재발 시 가장 먼저 반응.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><span class="theme-tag theme-safe">안전</span></div>
+                <h4>배당 ETF</h4>
+                <p>전쟁통에도 안정적. 나스닥100 커버드콜 연 19.6%, S&P500 커버드콜 연 14.6%, 일본리츠 월 6%+</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><span class="theme-tag theme-watch">관찰</span></div>
+                <h4>바이오</h4>
+                <p>삼천당제약 300%+ 사례. 에스티팜 RNA. AACR 등 학회 일정 체크 필수. 고위험/고수익.</p>
+            </div>
+        </div>
+
+        <h3>테마 이동 흐름 (3월 한 달)</h3>
+        <div class="box gold">
+            <div class="box-title">위기 &rarr; 안정화 테마 순환 패턴</div>
+            <div class="flow" style="margin-top: 12px;">
+                <span class="flow-step" style="background:#ef4444;">방산/우주항공</span><span class="flow-arrow">&rarr;</span>
+                <span class="flow-step" style="background:#f59e0b;">통신장비/광통신</span><span class="flow-arrow">&rarr;</span>
+                <span class="flow-step" style="background:#059669;">에너지(원전/풍력)</span><span class="flow-arrow">&rarr;</span>
+                <span class="flow-step" style="background:#2563eb;">AI반도체</span>
+            </div>
+            <p style="margin-top: 12px; font-size: 14px; color: var(--text-light);">
+                <strong>시사점:</strong> 위기 초반에는 방산/안보 테마 &rarr; 안정화되면 기술/성장 테마로 복귀
+            </p>
+        </div>
+    </section>
+
+    <!-- Part 5: Checklist -->
+    <section id="checklist">
+        <h2>Part 5. 실전 체크리스트</h2>
+
+        <h3>매수 전 체크리스트</h3>
+        <ul class="checklist">
+            <li>이 종목이 속한 섹터가 현재 상승 추세인가?</li>
+            <li>섹터 내 1위 또는 2위 기업인가?</li>
+            <li>영업이익 증가율이 30%+ 인가? (3~4년 평균 대비)</li>
+            <li>주봉 기준 눌림목(조정구간)인가?</li>
+            <li>전체 포트폴리오에서 10% 이하 비중인가?</li>
+            <li>현금비중은 충분히 확보했나?</li>
+            <li>추격매수가 아닌 조정매수인가?</li>
+        </ul>
+
+        <h3>매도 시점 체크리스트</h3>
+        <ul class="checklist">
+            <li>실적 발표일 전후 갭상승 발생?</li>
+            <li>섹터맵에서 해당 테마 축소 중?</li>
+            <li>목표 수익률 도달? (사전에 설정)</li>
+            <li>손절 라인 도달? (-10% 등 사전 설정)</li>
+        </ul>
+
+        <h3>일과 루틴 (장건 회장 스타일)</h3>
+        <div class="code-block">
+            <span class="label">Daily Routine</span>
+<span class="highlight">[장 시작 전]</span>  김도아식 아침 리포트 읽기
+              &mdash; 전일 시황, 오늘 전략
+
+<span class="highlight">[장 중]</span>       관망 or 설정한 매수가 도달 시만 행동
+
+<span class="highlight">[장 마감 후]</span>  상승률 TOP 20 &rarr; 섹터 분류 &rarr; 반복 종목 체크
+
+<span class="highlight">[주말]</span>        주봉 차트 점검 + 적정주가 재계산
+        </div>
+    </section>
+
+    <!-- Part 6: Market -->
+    <section id="market">
+        <h2>Part 6. 시장 흐름 복기</h2>
+        <p>2026년 3~4월, 전쟁 발발부터 휴전까지의 극한 장세를 복기합니다.</p>
+
+        <div class="timeline">
+            <div class="timeline-item down">
+                <div class="timeline-date">3/9 (일)</div>
+                <div class="timeline-event">미국-이란 전쟁 발발, 유가 100$ 돌파 <span class="timeline-value down">-5.96%</span></div>
+            </div>
+            <div class="timeline-item up">
+                <div class="timeline-date">3/10 (월)</div>
+                <div class="timeline-event">G7 비축유 방출, 트럼프-푸틴 통화 <span class="timeline-value up">+5.35%</span></div>
+            </div>
+            <div class="timeline-item up">
+                <div class="timeline-date">3/18 (화)</div>
+                <div class="timeline-event">외인 귀환, 사이드카 발동 <span class="timeline-value up">+5.04%</span></div>
+            </div>
+            <div class="timeline-item down">
+                <div class="timeline-date">3/23 (일)</div>
+                <div class="timeline-event">트럼프 48시간 최후통첩 <span class="timeline-value down">-6.49%</span></div>
+            </div>
+            <div class="timeline-item down">
+                <div class="timeline-date">3/31</div>
+                <div class="timeline-event">3월 총 19% 하락 (08년 이후 최대) <span class="timeline-value down">-4.26%</span></div>
+            </div>
+            <div class="timeline-item up">
+                <div class="timeline-date">4/1 (화)</div>
+                <div class="timeline-event">이란 대통령 휴전 시사 <span class="timeline-value up">+8.44%</span></div>
+            </div>
+            <div class="timeline-item down">
+                <div class="timeline-date">4/7 (월)</div>
+                <div class="timeline-event">삼성전자 어닝 서프라이즈 57.2조 &mdash; 전쟁에 반납</div>
+            </div>
+            <div class="timeline-item up">
+                <div class="timeline-date">4/8 (화)</div>
+                <div class="timeline-event">2주 휴전 합의, 환율 1496원대</div>
+            </div>
+        </div>
+
+        <div class="box warning">
+            <div class="box-title">복기에서 얻는 교훈</div>
+            <p>하루 -6.49%도 오지만 +8.44%도 온다. <strong>현금비중이 있어야 폭락을 기회로 바꾼다.</strong> 패닉셀이 아닌 대응 매매가 핵심.</p>
+        </div>
+    </section>
+
+    <!-- Part 7: Wisdom -->
+    <section id="wisdom">
+        <h2>Part 7. 핵심 교훈</h2>
+
+        <div class="quote">
+            "섹터가 돌고 종목이 반복되면 그게 신호다"
+            <div class="author">&mdash; 장건 회장</div>
+        </div>
+
+        <div class="quote">
+            "숫자(영업이익)로 계산하고, 차트(주봉)로 타이밍 잡아라"
+            <div class="author">&mdash; 김도아 교육이사</div>
+        </div>
+
+        <div class="quote">
+            "코스닥150이 강하면 건강한 상승, 현금비중이 무기다"
+            <div class="author">&mdash; 김영창</div>
+        </div>
+
+        <div class="quote">
+            "ETF로 깔고, 개별종목은 10% 이하로 즐겨라"
+            <div class="author">&mdash; H.S</div>
+        </div>
+    </section>
+
+    <!-- Part 8: Tools -->
+    <section id="tools">
+        <h2>Part 8. 참고 도구</h2>
+
+        <div class="card-grid">
+            <div class="card">
+                <h4>ETF Check</h4>
+                <p>ETF 비교 분석<br><strong>etfcheck.co.kr</strong></p>
+            </div>
+            <div class="card">
+                <h4>LongShort Now</h4>
+                <p>시장 분석<br><strong>longshortnow.com</strong></p>
+            </div>
+            <div class="card">
+                <h4>Perplexity AI</h4>
+                <p>종목 리서치, 뉴스 검색<br><strong>perplexity.ai</strong></p>
+            </div>
+            <div class="card">
+                <h4>증권사 HTS</h4>
+                <p>컨센서스/적정주가<br><strong>각 증권사 리포트</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>골든크로스 13기 카톡 대화 + 이미지 566개 종합 분석</p>
+        <p style="margin-top:4px; font-size:12px;">2026-04-11 &middot; AI Workspace</p>
+    </div>
+
+</main>
+
+<!-- Scroll spy -->
+<script>
+    const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+    const sections = [];
+
+    navLinks.forEach(link => {
+        const id = link.getAttribute('href').substring(1);
+        const el = document.getElementById(id);
+        if (el) sections.push({ id, el, link });
+    });
+
+    function updateActive() {
+        let current = sections[0];
+        const scrollY = window.scrollY + 120;
+
+        for (const s of sections) {
+            if (s.el.offsetTop <= scrollY) current = s;
+        }
+
+        navLinks.forEach(l => l.classList.remove('active'));
+        if (current) current.link.classList.add('active');
+    }
+
+    window.addEventListener('scroll', updateActive);
+    updateActive();
+
+    // Close sidebar on mobile when clicking a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 900) {
+                document.querySelector('.sidebar').classList.remove('open');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
